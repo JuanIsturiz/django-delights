@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% load static %} {% block title %}Purchases
+{% endblock %} {% block heading %} <span>Purchases</span> {% endblock %}
+{% block content %}
+<a href="{% url 'add_purchase' %}" class="text-xl text-gray-700 font-medium hover:underline">Record New Purchase</a>
+<table class="text-left text-xl border-separate">
+  <thead>
+    <th>Menu Item</th>
+    <th>Price</th>
+    <th>Date</th>
+  </thead>
+</thead>
+<tbody>
+  {% for purchase in object_list %}
+  <tr>
+    <td>{{purchase.menu_item.name.title}}</td>
+    <td><strong class="opacity-70">${{purchase.menu_item.price|stringformat:".2f"}}</strong></td>
+    <td>{{purchase.timestamp}}</td>
+  </tr>
+  {% endfor %}
+</tbody>
+</table>
+<style>
+  table {
+    border-spacing: 1rem 0.5rem;
+  }
+</style>
+{% endblock %}

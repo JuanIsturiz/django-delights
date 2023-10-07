@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% load static %} {% block title %}Reports{% endblock %}
+{% block heading %} <span>Reports</span> {% endblock %} {% block content %}
+<table class="text-left text-xl border-separate">
+  <thead>
+    <th>Menu Item</th>
+    <th>Price</th>
+    <th>Date</th>
+  </thead>
+</thead>
+<tbody>
+  {% for purchase in purchases %}
+  <tr>
+    <td>{{purchase.menu_item.name.title}}</td>
+    <td><strong class="opacity-70">${{purchase.menu_item.price|stringformat:".2f"}}</strong></td>
+    <td>{{purchase.timestamp}}</td>
+  </tr>
+  {% endfor %}
+</tbody>
+</table>
+<style>
+  table {
+    border-spacing: 1rem 0.5rem;
+  }
+</style>
+<div class="w-11/12 h-[1px] my-1 mx-auto bg-gray-300"></div>
+<h2 class="text-2xl font-medium pt-2">Totals</h2>
+<div class="flex justify-between w-64 text-lg text-green-700 font-medium">
+  <p>Total Revenue:</p>
+  <p>${{ revenue|stringformat:".2f" }}</p>
+</div>
+<div class="flex justify-between w-64 text-lg text-red-700 font-medium">
+  <p>Total Cost:</p>
+  <p>${{ total_cost|stringformat:".2f" }}</p>
+</div>
+<div class="flex justify-between w-64 text-lg text-blue-700 font-medium">
+  <p>Total Profit:</p>
+  <p>${{ profit|stringformat:".2f" }}</p>
+</div>
+{% endblock %}

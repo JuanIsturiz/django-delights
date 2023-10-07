@@ -20,13 +20,12 @@
       <hr class="my-1"/>
       <div class="grid grid-cols-3">
         {% for recipe_requirement in menu.reciperequirement_set.all %}
-        <p class="text-lg">{{ recipe_requirement.quantity }}</p>
-        <p class="text-lg">{{ recipe_requirement.ingredient.unit.upper }}</p>
-          <p class="text-lg">{{ recipe_requirement.ingredient.name.title }}</p>
+          <p class="text-lg font-medium">{{ recipe_requirement.quantity }}</p>
+          <p class="text-lg font-medium">{{ recipe_requirement.ingredient.unit.upper }}</p>
+          <p class="text-lg font-medium">{{ recipe_requirement.ingredient.name.title }}</p>
         {% endfor %}
       </div>
     </div>
   {% endfor %}
 </div>
-
 {% endblock %}

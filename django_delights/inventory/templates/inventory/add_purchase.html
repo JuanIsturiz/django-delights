@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% load static %} {% block title %}Purchases
+{% endblock %} {% block heading %}
+  <a href="{% url 'purchases' %}" class="mr-2 text-lg text-gray-700 font-medium hover:underline">&larr; Back</a>
+  <span>Record Purchase</span>
+{% endblock %}
+{% block content %}
+<form method="post">
+    <div>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <p>
+        <label for="menu_item">Menu item:</label>
+        <select name="menu_item" id="menu_item" required>
+            <option value selected>-----</option>
+        {% for menu_item in menu_items %}
+            <option value={{ menu_item.id }}>{{ menu_item.name }}</option>
+        {% endfor %}
+        </select>
+    </p>
+    <input class="mt-4 text-lg py-1 px-2 bg-gray-800 text-white rounded-sm" type="submit" value="Submit"/>
+    </div>
+    </form>
+{% endblock %}

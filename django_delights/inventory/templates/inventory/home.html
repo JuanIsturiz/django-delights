@@ -1,4 +1,75 @@
 {% extends "base.html" %} {% load static %} {% block title %}Home{% endblock %}
 {% block heading %} <span>Home</span> {% endblock %} {% block content %}
-<p>HOME CONTENT</p>
+{% comment %} Ingredients {% endcomment %}
+<h4 class="text-3xl text-gray-700 font-medium">Ingredients</h4>
+<table class="text-left text-xl border-separate">
+  <thead>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Unit</th>
+    <th>Unit Price</th>
+  </thead>
+</thead>
+<tbody>
+  {% for ingredient in ingredients %}
+  <tr>
+    <td><a href="{% url 'update_ingredient' ingredient.id %}" class="text-sky-900 hover:underline">{{ingredient.name.title}}</a></td>
+    <td>{{ingredient.quantity|stringformat:".2f"}}</td>
+    <td><strong class="opacity-70">{{ingredient.unit.upper}}</strong></td>
+    <td>${{ingredient.price_per_unit|stringformat:".2f"}}</td>
+  </tr>
+  {% endfor %}
+</tbody>
+</table>
+<style>
+  table {
+    border-spacing: 1rem 0.5rem;
+  }
+</style>
+<div class="w-11/12 h-[1px] my-1 mx-auto bg-gray-300"></div>
+{% comment %} Purchases {% endcomment %}
+<h4 class="text-3xl text-gray-700 font-medium">Purchases</h4>
+<table class="text-left text-xl border-separate">
+  <thead>
+    <th>Menu Item</th>
+    <th>Price</th>
+    <th>Date</th>
+  </thead>
+</thead>
+<tbody>
+  {% for purchase in purchases %}
+  <tr>
+    <td>{{purchase.menu_item.name.title}}</td>
+    <td><strong class="opacity-70">${{purchase.menu_item.price|stringformat:".2f"}}</strong></td>
+    <td>{{purchase.timestamp}}</td>
+  </tr>
+  {% endfor %}
+</tbody>
+</table>
+<style>
+  table {
+    border-spacing: 1rem 0.5rem;
+  }
+</style>
+<div class="w-11/12 h-[1px] my-1 mx-auto bg-gray-300"></div>
+{% comment %} Menu Items {% endcomment %}
+<h4 class="text-3xl text-gray-700 pt-2 font-medium">Menu</h4>
+<div class="my-2 pt-2 space-y-2">
+  {% for menu in menu_items %}
+    <div class="w-fit p-2 bg-gray-100 rounded-sm shadow-md">
+      <div class="flex justify-between">
+        <h3 class="text-2xl font-medium">{{ menu.name.title }}</h3>
+        <h3 class="text-xl font-medium">${{ menu.price|stringformat:'2.f' }}</h3>
+      </div>
+      <hr class="my-1"/>
+      <div class="grid grid-cols-3">
+        {% for recipe_requirement in menu.reciperequirement_set.all %}
+          <p class="text-lg font-medium">{{ recipe_requirement.quantity }}</p>
+          <p class="text-lg font-medium">{{ recipe_requirement.ingredient.unit.upper }}</p>
+          <p class="text-lg font-medium">{{ recipe_requirement.ingredient.name.title }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
 {% endblock %}

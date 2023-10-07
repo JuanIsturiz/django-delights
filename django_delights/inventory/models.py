@@ -10,7 +10,7 @@ class MenuItem(models.Model):
         return "/menu"
 
     def is_available(self):
-        return all(X.enough() for X in self.reciperequirement_set.all())
+        return all(X.is_enough() for X in self.reciperequirement_set.all())
 
     def __str__(self) -> str:
         return f"Name: {self.name} - Price: {self.price}"

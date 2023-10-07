@@ -26,3 +26,7 @@ main table {
   border-spacing: 0 15px;
   width: 80%;
 }
+
+.login-form form .errorlist {
+  color: #b91c1c;
+}
