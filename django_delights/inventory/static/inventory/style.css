@@ -1,0 +1,28 @@
+form * {
+  display: block;
+}
+
+form label {
+  font-size: 1em;
+  font-weight: bold;
+  padding-top: 15px;
+}
+
+form * {
+  width: 80%;
+  padding: .25rem;
+  outline: none;
+}
+
+form input,
+form select {
+  padding: .25rem;
+  outline: none;
+}
+
+main table {
+  text-align: left;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+  width: 80%;
+}

@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% load static %} {% block title %}Ingredients
+{% endblock %} {% block heading %} <span>Ingredients</span> {% endblock %}
+{% block content %}
+<a href="{% url 'add_ingredient' %}" class="text-xl text-gray-700 font-medium hover:underline">Add New Ingredient to Inventory</a>
+<table class="text-left text-xl border-separate">
+  <thead>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Unit</th>
+    <th>Unit Price</th>
+  </thead>
+</thead>
+<tbody>
+  {% for ingredient in object_list %}
+  <tr>
+    <td><a href="{% url 'update_ingredient' ingredient.id %}" class="text-sky-900 hover:underline">{{ingredient.name.title}}</a></td>
+    <td>{{ingredient.quantity|stringformat:".2f"}}</td>
+    <td><strong class="opacity-70">{{ingredient.unit.upper}}</strong></td>
+    <td>${{ingredient.price_per_unit|stringformat:".2f"}}</td>
+  </tr>
+  {% endfor %}
+</tbody>
+</table>
+<style>
+  table {
+    border-spacing: 1rem 0.5rem;
+  }
+</style>
+{% endblock %}

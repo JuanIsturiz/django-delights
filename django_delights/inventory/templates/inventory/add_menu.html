@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% load static %} {% block title %}Menu
+{% endblock %} {% block heading %}
+  <a href="{% url 'menu' %}" class="mr-2 text-lg text-gray-700 font-medium hover:underline">&larr; Back</a>
+  <span>New Menu</span>
+{% endblock %}
+{% block content %}
+  <form method="post">
+    <div class="w-full">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input class="mt-4 text-lg py-1 px-2 bg-gray-800 text-white rounded-sm" type="submit" value="Submit"/>
+    </div>
+  </form>
+{% endblock %}

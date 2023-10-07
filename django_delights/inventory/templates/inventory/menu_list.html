@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% load static %} {% block title %}Menu
+{% endblock %} {% block heading %} <span>Menu</span> {% endblock %}
+{% block content %}
+<div class="flex gap-2 items-center">
+  <div>
+    <a href="{% url 'add_menu' %}" class="text-xl text-gray-700 font-medium hover:underline">Add New Menu Item</a>
+  </div>
+  <div class="w-0.5 h-5 bg-gray-500"></div>
+  <div>
+    <a href="{% url 'add_recipe_requirement' %}" class="text-xl text-gray-700 font-medium hover:underline">Add Recipe Requirement for an Existing Menu Item</a>
+  </div>
+</div>
+<div class="my-2 space-y-2">
+  {% for menu in object_list %}
+    <div class="w-fit p-2 bg-gray-100 rounded-sm shadow-md">
+      <div class="flex justify-between">
+        <h3 class="text-2xl font-medium">{{ menu.name.title }}</h3>
+        <h3 class="text-xl font-medium">${{ menu.price|stringformat:'2.f' }}</h3>
+      </div>
+      <hr class="my-1"/>
+      <div class="grid grid-cols-3">
+        {% for recipe_requirement in menu.reciperequirement_set.all %}
+        <p class="text-lg">{{ recipe_requirement.quantity }}</p>
+        <p class="text-lg">{{ recipe_requirement.ingredient.unit.upper }}</p>
+          <p class="text-lg">{{ recipe_requirement.ingredient.name.title }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
